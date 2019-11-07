@@ -11,12 +11,6 @@ class SearchForm(forms.Form):
         ('author', 'Author'),
         ('keywords', 'Keywords'),
     ]
-    # ADVANCE_SEARCH_CHOICES = [
-    #     ('blue', 'Blue'),
-    #     ('green', 'Green'),
-    #     ('black', 'Black'),
-    # ]
-
     search_text = forms.CharField(label="Search", max_length=100)
     advance_search = forms.MultipleChoiceField(label="Advance Search", initial=['ISBN'], widget=forms.RadioSelect,  choices=ADVANCE_SEARCH_CHOICES)
 
