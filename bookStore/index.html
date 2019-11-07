@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Keywords"
+        content="ISBN, ISBN Search, compare book prices, bookfinder, book finder, bookfinders, book finders, out of print books, rare book, used books,book stores,discount books,online book stores,used book stores, book price comparison">
+
+    <title>Ketabcheh Bookstore</title>
+</head>
+<style>
+    html {
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        background-color: silver;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    #main-body {
+        padding: 100px;
+        text-align: center;
+        margin: auto;
+    }
+
+    hr {
+        border: 1px solid black;
+    }
+
+    h1 {
+        font-weight: 500;
+    }
+    
+    h6 {
+        font-weight: 100;
+    }
+</style>
+
+<body>
+    <div id="main-body">
+        <div>
+            <img src="img/logo2.png" alt="">
+            <h1>Ketabcheh</h1>
+            <h6>Find the Cheapest Book on Ketabcheh!</h6><br>
+        </div>
+
+        <div>
+            <div>
+                <span>
+                    <label for="site-search">Search Bookstore: </label>
+                </span>
+                <span>
+                    <input type="search" id="site-search" name="search-box" aria-label="Search through site content"
+                        size="72">
+                </span>
+                <span>
+                    <button>Search</button>
+                </span>
+            </div>
+
+            <div>
+                <p>Advanced Search by:
+                    <input type="radio" checked name="s_option" value="isbn">ISBN(10 or 13)
+                    <input type="radio" name="s_option" value="title">TITLE
+                    <input type="radio" name="s_option" value="author">AUTHOR
+                    <input type="radio" name="s_option" value="keyword">KEYWORD
+                </p>
+                <hr>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
