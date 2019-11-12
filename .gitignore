@@ -1,5 +1,7 @@
 *venv*
 .idea*
 keta/__pycache__/forms.cpython-37.pyc
+keta/__pycache__/views.cpython-37.pyc
 *node_modules*
+
 
