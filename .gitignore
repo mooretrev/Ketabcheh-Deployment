@@ -1,2 +1,5 @@
 *venv*
 .idea*
+keta/__pycache__/forms.cpython-37.pyc
+*node_modules*
+
