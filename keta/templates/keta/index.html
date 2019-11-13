@@ -48,16 +48,18 @@
 
         <div>
             <div>
-                <span>
-                    <label for="site-search">Search Bookstore: </label>
-                </span>
-                <span>
-                    <input type="search" id="site-search" name="search-box" aria-label="Search through site content"
-                        size="72">
-                </span>
-                <span>
-                    <button>Search</button>
-                </span>
+<!--                <span>-->
+<!--                    <label for="site-search">Search Bookstore: </label>-->
+<!--                </span>-->
+<!--                <span>-->
+<!--                    <input type="search" id="site-search" name="search-box" aria-label="Search through site content"-->
+<!--                        size="72">-->
+<!--                </span>-->
+                <form action="/keta/display_name/" method="post">
+                    {% csrf_token %}
+                    {{search_form}}
+                    <input type="submit" value="Submit">
+                </form>
             </div>
 
             <div>
