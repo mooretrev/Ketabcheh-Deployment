@@ -12,7 +12,7 @@ from .models import Question, Choice
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
-from .forms import NameForm
+from .forms import SearchForm, NameForm
 
 def get_name(request):
     form = NameForm()
@@ -26,8 +26,8 @@ def display_name(request):
         return HttpResponseNotFound('<h1>Page not found</h1>')
 
 def index(request):
-    latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    context = {'latest_question_list': latest_question_list}
+    search_form = SearchForm()
+    context = {'search_form': search_form}
     return render(request, 'keta/index.html', context)
 
 def detail(request, question_id):
