@@ -23,6 +23,13 @@
             <h6>Find the Cheapest Book on Ketabcheh!</h6><br>
         </div>
 
+<!--        <form action="/keta/" method="post">-->
+<!--            {% csrf_token %}-->
+<!--            {{search_form}}-->
+<!--            <input type="submit" value="Submit">-->
+<!--        </form>-->
+
+
 
         <div id="Post Form Usuable">
             <form action="/keta/" method="post">
@@ -40,24 +47,32 @@
                 <div id = "Advance Search Options">
                     <span class="search-options">Advanced Search by:</span>
                     {% for radio in search_form.advance_search %}
-<!--                        <label for="{{radio.id_for_label}">-->
-                            <span class="search-options">
+                    <span class="search-options">
                                 {{radio.tag}}
                                 <span class="search-opt">
                                     {{radio.choice_label}}
                                 </span>
-                            </span>
-
-<!--                        </label>-->
-
+                    </span>
                     {% endfor %}
-
-
                 </div>
-
             </form>
-        </div>
-        <div class="divider"></div>
+
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <div class="divider"></div>
     </div>
 
 <!--    <div>-->

@@ -2,14 +2,24 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from . forms import SearchForm
 
-
-
-
 def index(request):
+    context = {}
     if request.method == 'POST':
-        return HttpResponse('<h1> Post Method </h1>')
+        form = SearchForm(request.POST)
+        context['form'] = form
+        if form.is_valid():
+            search_text = form.cleaned_data['search_text']
+            type_of_search = form.cleaned_data['advance_search']
+            if type_of_search == 'isbn':
+                # call to isbn
+                return HttpResponse('type: isbn search text: {}'.format(search_text))
+            elif type_of_search == 'title':
+                return HttpResponse('type: title search text: {}'.format(search_text))
+            else:
+                print('search {} type {}'.format(search_text, type_of_search))
+                return HttpResponse('<h1> Post Method {{search_text}}</h1>')
     search_form = SearchForm()
-    context = {'search_form': search_form}
+    context['search_form'] = search_form
 
     return render(request, 'keta/index.html', context)
 
