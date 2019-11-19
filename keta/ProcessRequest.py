@@ -2,9 +2,7 @@ import requests
 import json
 
 '''
-    Given an isbn number, return an array of the related info about the book
-    
-    Use json loads
+    Book Run API Reference: https://booksrun.com/page/api-reference
 '''
 def process_api(url):
     response = requests.get(url)
@@ -12,17 +10,25 @@ def process_api(url):
 
     return book_info
 
-def books_search_by_title(title):
+def google_books_search_by_title(title):
     key = "AIzaSyDgszPoXualhFKbDKCNxXXn3cdOhLKgi6A"
     url = r'https://www.googleapis.com/books/v1/volumes?q=title:{}&key={}'.format(title, key)
     return process_api(url)
 
-def books_search_by_isbn(isbn):
+def google_books_search_by_isbn(isbn):
     key = "AIzaSyDgszPoXualhFKbDKCNxXXn3cdOhLKgi6A"
 
     url = r'https://www.googleapis.com/books/v1/volumes?q=isbn:{}&key={}'.format(isbn, key)
     return process_api(url)
 
+def good_book_review(isbn):
+    key = "dAZ4wVt4kAgUHeDTPUPDw"
+    secret = "ojQMNBUNrFvYrHLDK3cnALRmKQyzDBB3jQw5oGddnY"
+
+    url = r'https://www.goodreads.com/book/review_counts.json?key={}&isbns={}'.format(key, isbn)
+    return process_api(url)
+
+# Book Run API Reference: https://booksrun.com/page/api-reference
 def book_run_api_call(isbn):
     price_key = 'hemn2x0o9xwbe7bfz2jz'
     affiliate_key = '5391'
@@ -36,7 +42,8 @@ def book_run_api_call(isbn):
 # print(result)
 # print(result['items'][0])
 
-print(book_run_api_call('1464108730'))
+# print(book_run_api_call('1464108730'))
+print(good_book_review('1464108730'))
 
 
 
