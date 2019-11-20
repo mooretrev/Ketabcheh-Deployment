@@ -1,18 +1,26 @@
 import requests
 import json
 from .Book import Book
+# from Book import Book
 
 '''
     Book Run API Reference: https://booksrun.com/page/api-reference
 '''
 # OLIN
 
+class ErrorNoReviewFound(BaseException):
+    pass
 
-def process_isbn(isbn):
-    generalInfo = google_books_search_by_isbn(
-        isbn)['items'][0]['volumeInfo']
+
+def process_isbn(isbn, generalInfo=None):
+    if generalInfo is None:
+        generalInfo = google_books_search_by_isbn(
+            isbn)['items'][0]['volumeInfo']
     priceInfo = book_run_api_call(isbn)['result']['offers']['booksrun']
-    ratingInfo = good_book_review(isbn)['books'][0]
+    try:
+        ratingInfo = good_book_review(isbn)['books'][0]
+    except ErrorNoReviewFound:
+        ratingInfo = {'average_rating':'No reviews yet!'}
 
     title = generalInfo['title']
     description = generalInfo['description']
@@ -26,15 +34,24 @@ def process_isbn(isbn):
     rating = ratingInfo['average_rating']
     # print(prices)
 
-    b = Book(title, description, prices, rating, authors, publisher, date)
-    b.display()
-    # create book data structure
+    b = Book(title, description, prices, rating, authors, publisher, date, isbn)
     return b
 
 
 def process_title(title):
-    # create an array of book data structure
-    pass
+    google_api_results = google_books_search_by_title(title)
+    num_of_results = google_api_results['totalItems']
+    i = 0
+    end_i = 5
+    results = []
+    while(i < end_i and i < num_of_results):
+        isbn = google_api_results['items'][i]['volumeInfo']['industryIdentifiers'][0]['identifier']
+        general_info = google_api_results['items'][i]['volumeInfo']
+        results.append(process_isbn(isbn, general_info))
+        i += 1
+
+    return results
+
 
 
 def process_api(url):
@@ -65,7 +82,11 @@ def good_book_review(isbn):
 
     url = r'https://www.goodreads.com/book/review_counts.json?key={}&isbns={}'.format(
         key, isbn)
-    return process_api(url)
+    response = requests.get(url)
+    if response.status_code == 404:
+        raise ErrorNoReviewFound
+    book_info = json.loads(response.text)
+    return book_info
 
 # Book Run API Reference: https://booksrun.com/page/api-reference
 
@@ -81,8 +102,12 @@ def book_run_api_call(isbn):
     return process_api(url)
 
 
-# result = books_search_by_title("hungery games")
+# process_title('hunger games')
+# result = google_books_search_by_title("hungery games")
 # print(result)
+# print(result['totalItems'])
+
+# print(result['items'][0]['volumeInfo']['industryIdentifiers'][0]['identifier'])
 # print(result['items'][0])
 # print(book_run_api_call('1464108730'))
 # print(good_book_review('1464108730'))

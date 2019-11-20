@@ -20,7 +20,8 @@ def index(request):
                 context['books'] = books
                 return render(request, 'keta/index.html', context)
             elif type_of_search == 'title':
-                return HttpResponse('type: title search text: {}'.format(search_text))
+                context['books'] = ProcessRequest.process_title(search_text)
+                return render(request, 'keta/index.html', context)
             else:
                 print('search {} type {}'.format(search_text, type_of_search))
                 return HttpResponse('<h1> Post Method {{search_text}}</h1>')
