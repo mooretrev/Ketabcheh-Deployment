@@ -6,7 +6,6 @@ class Book:
         self.stars = _stars
         self.prices = []
         self.vendors = []
-        self.book_cover = _book_cover
         self.author = _author
         self.publisher = _publisher
         self.year = _year
