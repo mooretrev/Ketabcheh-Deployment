@@ -78,10 +78,23 @@
 
 
     {% for book in books %}
-        <h1>{{book.title}}</h1>
-        <p>{{book.description}}</p>
-        <p>Rating: {{book.rating}}</p>
-        <div id="clear" style="clear:both;"></div>
+<!--        <h1>{{book.title}}</h1>-->
+<!--        <p>{{book.description}}</p>-->
+<!--        <p>Rating: {{book.rating}}</p>-->
+<!--        <div id="clear" style="clear:both;"></div>-->
+
+        <div class="just">
+        <h3 class="aut-tit">{{book.title}}</h3>
+        <h5 class="aut-tit">
+            {% for author in book.authors %}
+            {{author}}
+            {% endfor %}
+        </h5>
+        <div class="desc">
+          <h6>{{book.description}}</h6>
+        </div>
+      </div>
+      <div class="divider"></div>
 
 
         <div>

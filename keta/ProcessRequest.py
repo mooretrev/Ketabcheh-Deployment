@@ -14,8 +14,7 @@ class ErrorNoReviewFound(BaseException):
 
 def process_isbn(isbn, generalInfo=None):
     if generalInfo is None:
-        generalInfo = google_books_search_by_isbn(
-            isbn)['items'][0]['volumeInfo']
+        generalInfo = google_books_search_by_isbn(isbn)['items'][0]['volumeInfo']
     priceInfo = book_run_api_call(isbn)['result']['offers']['booksrun']
     try:
         ratingInfo = good_book_review(isbn)['books'][0]
