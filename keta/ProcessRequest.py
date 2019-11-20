@@ -4,6 +4,14 @@ import json
 '''
     Book Run API Reference: https://booksrun.com/page/api-reference
 '''
+######## OLIN
+def process_isbn(isbn):
+    # create book data structure
+    pass
+
+def process_title(title):
+    # create an array of book data structure
+    pass
 
 def process_api(url):
     response = requests.get(url)
@@ -34,7 +42,10 @@ def book_run_api_call(isbn):
     price_key = 'hemn2x0o9xwbe7bfz2jz'
     affiliate_key = '5391'
 
-    url = r'http://booksrun.com/api/price/sell/{}?key={}'.format(isbn, price_key)
+    url = r'https://booksrun.com/api/v3/price/buy/{}?key={}'.format(isbn, price_key)
+
+
+    # url = r'http://booksrun.com/api/price/sell/{}?key={}'.format(isbn, price_key)
     return process_api(url)
 
 
@@ -44,8 +55,9 @@ def book_run_api_call(isbn):
 # print(result['items'][0])
 
 # print(book_run_api_call('1464108730'))
-print(good_book_review('1464108730'))
-
+# print(good_book_review('1464108730'))
+print(book_run_api_call('1464108730'))
+# print(google_books_search_by_isbn('1464108730'))
 
 
 
