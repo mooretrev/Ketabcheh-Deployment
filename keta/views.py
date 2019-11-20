@@ -1,9 +1,13 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from . forms import SearchForm
+from . import ProcessRequest
 
 def index(request):
     context = {}
+    search_form = SearchForm()
+    context['search_form'] = search_form
+    context['books'] = []
     if request.method == 'POST':
         form = SearchForm(request.POST)
         context['form'] = form
@@ -11,15 +15,16 @@ def index(request):
             search_text = form.cleaned_data['search_text']
             type_of_search = form.cleaned_data['advance_search']
             if type_of_search == 'isbn':
-                # call to isbn
-                return HttpResponse('type: isbn search text: {}'.format(search_text))
+                books = [None] * 1
+                books[0] = ProcessRequest.process_isbn(search_text)
+                context['books'] = books
+                return render(request, 'keta/index.html', context)
             elif type_of_search == 'title':
                 return HttpResponse('type: title search text: {}'.format(search_text))
             else:
                 print('search {} type {}'.format(search_text, type_of_search))
                 return HttpResponse('<h1> Post Method {{search_text}}</h1>')
-    search_form = SearchForm()
-    context['search_form'] = search_form
+
 
     return render(request, 'keta/index.html', context)
 

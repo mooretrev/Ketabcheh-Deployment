@@ -1,6 +1,6 @@
 import requests
 import json
-from Book import Book
+from .Book import Book
 
 '''
     Book Run API Reference: https://booksrun.com/page/api-reference
@@ -29,7 +29,7 @@ def process_isbn(isbn):
     b = Book(title, description, prices, rating, authors, publisher, date)
     b.display()
     # create book data structure
-    pass
+    return b
 
 
 def process_title(title):
@@ -88,5 +88,5 @@ def book_run_api_call(isbn):
 # print(good_book_review('1464108730'))
 # print(book_run_api_call('1464108730'))
 # print(google_books_search_by_isbn('1464108730'))
-print(google_books_search_by_title('hunger games'))
-process_isbn("1464108730")
+# print(google_books_search_by_title('hunger games'))
+# process_isbn("1464108730")
