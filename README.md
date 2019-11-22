@@ -13,7 +13,8 @@ We discussed how we should connect our book data structure to our front end.
 Sprint 2 Scrum Meeting time: 3
 We discussed how we are going to end our sprint.
 
-Sprint 2 Retrospective Meeting time:
+Sprint 2 Retrospective Meeting time: 5
+We gave an introduction to our project, then we discussed what went well in our sprint and did not go well during our sprint. 
 
 https://github.com/dance2die/google-book-shell
 https://github.com/chaitanyanettem/justcompare
