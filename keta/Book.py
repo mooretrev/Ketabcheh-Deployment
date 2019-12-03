@@ -18,6 +18,7 @@ class Book:
         self.publisher = publisher
         self.year = year
         self.isbn = isbn
+        self.released = True
 
     def display(self):
         print("Title: " + self.title)

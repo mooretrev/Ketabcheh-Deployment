@@ -1,7 +1,7 @@
 import requests
 import json
-from .Book import Book
-# from Book import Book
+# from .Book import Book
+from Book import Book
 
 '''
     Book Run API Reference: https://booksrun.com/page/api-reference
@@ -111,6 +111,6 @@ def book_run_api_call(isbn):
 # print(book_run_api_call('1464108730'))
 # print(good_book_review('1464108730'))
 # print(book_run_api_call('1464108730'))
-# print(google_books_search_by_isbn('1464108730'))
+# print(google_books_search_by_isbn('9780008165130'))
 # print(google_books_search_by_title('hunger games'))
 # process_isbn("1464108730")
