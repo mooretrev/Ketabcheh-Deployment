@@ -12,8 +12,8 @@ class Book:
         self.title = title
         self.description = desc
         self.rating = rating
-        self.prices = prices
-        # self.vendors = []
+        self.prices = prices # prices from low to high
+        self.vendors = [] # link to external website where the user can buy the book
         self.authors = authors
         self.publisher = publisher
         self.year = year
