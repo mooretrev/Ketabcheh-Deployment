@@ -16,168 +16,156 @@
 </style>-->
 
 <body>
-    <div id="main-body">
-        <div>
-            <img src="{% static "keta/logo2.png" %}" alt="">
-            <h1>Ketabcheh</h1>
-            <h6>Find the Cheapest Book on Ketabcheh!</h6><br>
-        </div>
+  <div id="main-body">
+    <div>
+      <img src="{% static "keta/logo2.png" %}" alt="">
+      <h1>Ketabcheh</h1>
+      <h6>Find the Cheapest Book on Ketabcheh!</h6><br>
+    </div>
 
-<!--        <form action="/keta/" method="post">-->
-<!--            {% csrf_token %}-->
-<!--            {{search_form}}-->
-<!--            <input type="submit" value="Submit">-->
-<!--        </form>-->
+    <div id="Post Form Usuable">
+        <form action="/" method="post">
+            {% csrf_token %}
+            <div id="Search bar and search button">
+                <span>
+                    {{search_form.search_text}}
+                </span>
 
+                <span>
+                    <button class="cta-search">Search</button>
+                </span>
+            </div>
 
-
-        <div id="Post Form Usuable">
-            <form action="/" method="post">
-                {% csrf_token %}
-                <div id="Search bar and search button">
-                    <span>
-                        {{search_form.search_text}}
-                    </span>
-
-                    <span>
-                        <button class="cta-search">Search</button>
-                    </span>
-                </div>
-
-                <div id = "Advance Search Options">
-                    <span class="search-options">Advanced Search by:</span>
-                    {% for radio in search_form.advance_search %}
-                    <span class="search-options">
-                                {{radio.tag}}
-                                <span class="search-opt">
-                                    {{radio.choice_label}}
-                                </span>
-                    </span>
-                    {% endfor %}
-                </div>
-            </form>
-
-            {% if form.errors %}
-                {% for field in form %}
-                    {% for error in field.errors %}
-                        <div class="alert alert-danger">
-                            <strong>{{ error|escape }}</strong>
-                        </div>
-                    {% endfor %}
+            <div id = "Advance Search Options">
+                <span class="search-options">Advanced Search by:</span>
+                {% for radio in search_form.advance_search %}
+                <span class="search-options">
+                            {{radio.tag}}
+                            <span class="search-opt">
+                                {{radio.choice_label}}
+                            </span>
+                </span>
                 {% endfor %}
-                {% for error in form.non_field_errors %}
+            </div>
+        </form>
+
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
                     <div class="alert alert-danger">
                         <strong>{{ error|escape }}</strong>
                     </div>
                 {% endfor %}
-            {% endif %}
-
-    </div>
-                    <div class="divider"></div>
-
-
-
-    {% for book in books %}
-        <div class="just">
-        <h3 class="aut-tit">{{book.title}}</h3>
-        <h5 class="aut-tit">
-           {% for author in book.authors %}
-            {{author}}
             {% endfor %}
-        </h5>
-        <div class="desc">
-          <h6>{{book.description}}</h6>
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+</div>
+
+
+      <div class="divider"></div>
+
+      {% for book in books %}
+          <div class="just">
+          <h3 class="aut-tit">{{book.title}}</h3>
+          <h5 class="aut-tit">
+             {% for author in book.authors %}
+              {{author}}
+              {% endfor %}
+          </h5>
+          <div class="desc">
+            <h6>{{book.description}}</h6>
+
         </div>
       </div>
       <div class="divider"></div>
 
-<div>
-        <section class="price-comparison">
-            <div class="price-column">
-              <div class="price-header">
-                <div class="price">
-                  <div class="dollar-sign">$</div>
-                  30
+    <div id="results">
+      <section class="price-comparison">
+        <div class="price-column">
+          <div class="price-header">
+            <div class="price">
+              <div class="dollar-sign">$</div>
+              30
 
-                </div>
-                <div class="plan-name">Google</div>
-              </div>
-              <div class="divider"></div>
-              <div class="feature">
-                <img src="check-circle.svg">
-                1st comment
-              </div>
-              <div class="feature">
-                <img src={% static "keta/check-circle.svg"%}>
-                2nd commen
-        t
-              </div>
-              <div class="feature inactive">
-                <img src="x-square.svg">
-                3rd comment
-              </div>
-
-              <button class="cta">Order Now</button>
             </div>
-            <div class="price-column popular">
-              <div class="most-popular">Cheapest</div>
-              <div class="price-header">
-                <div class="price">
-                  <div class="dollar-sign">$</div>
-                  10
+            <div class="plan-name">Google</div>
+          </div>
+          <div class="divider"></div>
+          <div class="feature">
+            <img src={% static "keta/check-circle.svg"%}>
+            1st comment
+          </div>
+          <div class="feature">
+            <img src={% static "keta/check-circle.svg"%}>
+            2nd comment
+          </div>
+          <div class="feature inactive">
+            <img src={% static "keta/check-circle.svg"%}>
+            3rd comment
+          </div>
 
-                </div>
-                <div class="plan-name">Amazon</div>
-              </div>
-              <div class="divider"></div>
-              <div class="feature">
-                <img src="check-circle.svg">
-                1st comment
-              </div>
-              <div class="feature">
-                <img src="check-circle.svg">
-                2nd comment
-              </div>
-              <div class="feature inactive">
-                <img src="check-circle.svg">
-                3rd comment
-              </div>
-
-              <button class="cta">Order Now</button>
-            </div>
-            <div class="price-column">
-              <div class="price-header">
-                <div class="price">
-                  <div class="dollar-sign">$</div>
-                  20
-
-                </div>
-                <div class="plan-name">ebay</div>
-              </div>
-              <div class="divider"></div>
-              <div class="feature">
-                <img src="img/check-circle.svg">
-                1st comment
-              </div>
-              <div class="feature">
-                <img src={% static "keta/check-circle.svg"%}>
-                2nd comment
-              </div>
-              <div class="feature inactive">
-                <img src="check-circle.svg">
-                3rd comment
-              </div>
-
-              <button class="cta">Order Now</button>
-            </div>
-          </section>
+          <button class="cta">Order Now</button>
         </div>
-            <div class="divider"></div>
+        <div class="price-column popular">
+          <div class="most-popular">Cheapest</div>
+          <div class="price-header">
+            <div class="price">
+              <div class="dollar-sign">$</div>
+              10
+
+            </div>
+            <div class="plan-name">Amazon</div>
+          </div>
+          <div class="divider"></div>
+          <div class="feature">
+            <img src={% static "keta/check-circle.svg"%}>
+            1st comment
+          </div>
+          <div class="feature">
+            <img src={% static "keta/check-circle.svg"%}>
+            2nd comment
+          </div>
+          <div class="feature inactive">
+            <img src={% static "keta/check-circle.svg"%}>
+            3rd comment
+          </div>
+
+          <button class="cta">Order Now</button>
+        </div>
+        <div class="price-column">
+          <div class="price-header">
+            <div class="price">
+              <div class="dollar-sign">$</div>
+              20
+
+            </div>
+            <div class="plan-name">ebay</div>
+          </div>
+          <div class="divider"></div>
+          <div class="feature">
+            <img src={% static "keta/check-circle.svg"%}>
+            1st comment
+          </div>
+          <div class="feature">
+            <img src={% static "keta/check-circle.svg"%}>
+            2nd comment
+          </div>
+          <div class="feature inactive">
+            <img src={% static "keta/check-circle.svg"%}>
+            3rd comment
+          </div>
+
+          <button class="cta">Order Now</button>
+        </div>
+      </section>
+    </div>
+    <div class="divider"></div>
     {%endfor%}
 
-
-
-
 </body>
-
 </html>
