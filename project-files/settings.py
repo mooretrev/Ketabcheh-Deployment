@@ -119,4 +119,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/home/mooretrev/Ketabcheh-Deployemnt/static'
+STATIC_ROOT = '/home/ketabcheh/Ketabcheh-Deployemnt/static'
