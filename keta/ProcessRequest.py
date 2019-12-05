@@ -8,32 +8,51 @@ from Book import Book
 '''
 # OLIN
 
+
 class ErrorNoReviewFound(BaseException):
     pass
 
 
 def process_isbn(isbn, generalInfo=None):
     if generalInfo is None:
-        generalInfo = google_books_search_by_isbn(isbn)['items'][0]['volumeInfo']
+        generalInfo = google_books_search_by_isbn(
+            isbn)['items'][0]
     priceInfo = book_run_api_call(isbn)['result']['offers']['booksrun']
     try:
         ratingInfo = good_book_review(isbn)['books'][0]
     except ErrorNoReviewFound:
-        ratingInfo = {'average_rating':'No reviews yet!'}
+        ratingInfo = {'average_rating': 'No reviews yet!'}
 
-    title = generalInfo['title']
-    description = generalInfo['description']
-    authors = generalInfo['authors']
-    publisher = generalInfo['publisher']
-    date = generalInfo['publishedDate']
-    prices = [-1 if priceInfo['used'] ==
-              'none' else priceInfo['used']['price'],
-              -1 if priceInfo['new'] ==
-              'none' else priceInfo['new']['price']]
+    title = generalInfo['volumeInfo']['title']
+    description = generalInfo['volumeInfo']['description']
+    authors = generalInfo['volumeInfo']['authors']
+    publisher = generalInfo['volumeInfo']['publisher']
+    date = generalInfo['volumeInfo']['publishedDate']
+    availableGoogle = generalInfo['saleInfo']['saleability'] == "FOR_SALE"
+
+    # [bookrun used, bookrun new, google listprice]
+
+    prices = [{'price': -1 if priceInfo['used'] ==
+               'none' else priceInfo['used']['price'], 'url': -1 if priceInfo['used'] ==
+               'none' else priceInfo['used']['cart_url'], 'type':'bookrun used'},
+              {'price': -1 if priceInfo['new'] ==
+               'none' else priceInfo['new']['price'], 'url': -1 if priceInfo['new'] ==
+               'none' else priceInfo['new']['cart_url'], 'type':'bookrun new'},
+              {'price': generalInfo['retailPrice']['amount'] if availableGoogle else -1,
+               'url': generalInfo['buyLink'] if availableGoogle else -1,
+               'type': 'google'}]
     rating = ratingInfo['average_rating']
-    # print(prices)
 
-    b = Book(title, description, prices, rating, authors, publisher, date, isbn)
+    purchasable = False
+    for p in prices:
+        if p['price'] != -1:
+            purchasable = True
+
+    print(prices)
+    print(purchasable)
+
+    b = Book(title, description, prices, rating,
+             authors, publisher, date, isbn, purchasable)
     return b
 
 
@@ -50,7 +69,6 @@ def process_title(title):
         i += 1
 
     return results
-
 
 
 def process_api(url):
@@ -113,4 +131,4 @@ def book_run_api_call(isbn):
 # print(book_run_api_call('1464108730'))
 # print(google_books_search_by_isbn('9780008165130'))
 # print(google_books_search_by_title('hunger games'))
-# process_isbn("1464108730")
+process_isbn("9780439023528")
