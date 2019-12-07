@@ -32,27 +32,42 @@ def process_isbn(isbn, generalInfo=None):
 
     # [bookrun used, bookrun new, google listprice]
 
-    prices = [{'price': -1 if priceInfo['used'] ==
-               'none' else priceInfo['used']['price'], 'url': -1 if priceInfo['used'] ==
-               'none' else priceInfo['used']['cart_url'], 'type':'bookrun used'},
-              {'price': -1 if priceInfo['new'] ==
-               'none' else priceInfo['new']['price'], 'url': -1 if priceInfo['new'] ==
-               'none' else priceInfo['new']['cart_url'], 'type':'bookrun new'},
-              {'price': generalInfo['retailPrice']['amount'] if availableGoogle else -1,
-               'url': generalInfo['buyLink'] if availableGoogle else -1,
-               'type': 'google'}]
+    pricesVendors = [{'price': -1 if priceInfo['used'] ==
+                      'none' else priceInfo['used']['price'], 'url': -1 if priceInfo['used'] ==
+                      'none' else priceInfo['used']['cart_url'], 'type':'bookrun used'},
+                     {'price': -1 if priceInfo['new'] ==
+                      'none' else priceInfo['new']['price'], 'url': -1 if priceInfo['new'] ==
+                      'none' else priceInfo['new']['cart_url'], 'type':'bookrun new'},
+                     {'price': generalInfo['retailPrice']['amount'] if availableGoogle else -1,
+                      'url': generalInfo['buyLink'] if availableGoogle else -1,
+                      'type': 'google'}]
+
     rating = ratingInfo['average_rating']
+    pricesVendors = sorted(pricesVendors, key=lambda i: i['price'])
+
+    prices = []
+    for p in pricesVendors:
+        if p['price'] != -1:
+            prices.append(p['price'])
+
+    vendors = []
+    for v in pricesVendors:
+        if v['url'] != -1:
+            vendors.append(v['url'])
+    print(vendors)
 
     purchasable = False
-    for p in prices:
+    for p in pricesVendors:
         if p['price'] != -1:
             purchasable = True
 
-    print(prices)
+    print(pricesVendors)
     print(purchasable)
 
     b = Book(title, description, prices, rating,
-             authors, publisher, date, isbn, purchasable)
+             authors, publisher, date, isbn, purchasable, vendors)
+
+    b.display()
     return b
 
 

@@ -8,12 +8,12 @@ class Book:
     publisher = ''
     year = ''
 
-    def __init__(self, title, desc, prices, rating, authors, publisher, year, isbn, released):
+    def __init__(self, title, desc, prices, rating, authors, publisher, year, isbn, released, vendors):
         self.title = title
         self.description = desc
         self.rating = rating
         self.prices = prices  # prices from low to high
-        # self.vendors = [] # link to external website where the user can buy the book
+        self.vendors = vendors  # link to external website where the user can buy the book
         self.authors = authors
         self.publisher = publisher
         self.year = year
@@ -24,9 +24,10 @@ class Book:
         print("Title: " + self.title)
         print('Description: ' + self.description)
         print('Raing: ' + self.rating)
-        print('Prices: \n\tUsed: ' +
-              str(self.prices[0]) + "\n\tNew: " + str(self.prices[1]))
+        print('Prices: ' + str(self.prices))
+        print('Vendors: ' + str(self.vendors))
         print('Authors: ' + str(self.authors))
         print('Publisher: ' + self.publisher)
         print('Year: ' + self.year)
         print('ISBN: ' + self.isbn)
+        print('Released: ' + str(self.released))
