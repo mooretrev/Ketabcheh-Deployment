@@ -24,7 +24,11 @@ def process_isbn(isbn, generalInfo=None):
     title = generalInfo['title']
     description = generalInfo['description']
     authors = generalInfo['authors']
-    publisher = generalInfo['publisher']
+    try:
+        publisher = generalInfo['publisher']
+    except KeyError:
+        publisher = "no publisher found"
+
     date = generalInfo['publishedDate']
     prices = [-1 if priceInfo['used'] ==
               'none' else priceInfo['used']['price'],
@@ -100,7 +104,8 @@ def book_run_api_call(isbn):
     # url = r'http://booksrun.com/api/price/sell/{}?key={}'.format(isbn, price_key)
     return process_api(url)
 
-
+book = process_isbn('0439023483')
+book.display()
 # process_title('hunger games')
 # result = google_books_search_by_title("hungery games")
 # print(result)
