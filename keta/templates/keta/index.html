@@ -88,21 +88,19 @@
         <section class="price-comparison">
         {% if book.released %}
             {% if book.arrayLen == 1 %}
-                <div class="price-column popular">
-                    <div class="most-popular">Cheapest</div>
-                    <div class="price-header">
-                        <div class="price">
-                            <div class="dollar-sign">$</div>
-                                {{book.prices.0}}
+                <div class="price-column">
+                <div class="price-header">
+                    <div class="price">
+                        <div class="dollar-sign">$</div>
+                            -
                         </div>
-                        <div class="plan-name">1st Option</div>
-                    </div>
-                    <div class="divider"></div>
-                    <a href = "{{book.vendors.0}}" target="_blank"> <button class="cta">Order Now</button></a>
+                    <div class="plan-name">3rd Option</div>
                 </div>
+                <div class="divider"></div>
+                <a href = "" target="_blank"> <button class="cta">Order Now</button></a>
+            </div>
 
-            {% elif book.arrayLen == 2 %}
-                <div class="price-column popular">
+            <div class="price-column popular">
                     <div class="most-popular">Cheapest</div>
                     <div class="price-header">
                         <div class="price">
@@ -119,12 +117,50 @@
                 <div class="price-header">
                     <div class="price">
                         <div class="dollar-sign">$</div>
-                            {{book.prices.1}}
+                            -
                         </div>
                     <div class="plan-name">2nd Option</div>
                 </div>
                 <div class="divider"></div>
-                <a href = "{{book.vendors.1}}" target="_blank"> <button class="cta">Order Now</button></a>
+                <a href = "" target="_blank"> <button class="cta">Order Now</button></a>
+            </div>
+
+            {% elif book.arrayLen == 2 %}
+                <div class="price-column">
+                <div class="price-header">
+                    <div class="price">
+                        <div class="dollar-sign">$</div>
+                            -
+                        </div>
+                    <div class="plan-name">3rd Option</div>
+                </div>
+                <div class="divider"></div>
+                <a href = "" target="_blank"> <button class="cta">Order Now</button></a>
+            </div>
+
+            <div class="price-column popular">
+                    <div class="most-popular">Cheapest</div>
+                    <div class="price-header">
+                        <div class="price">
+                            <div class="dollar-sign">$</div>
+                                {{book.prices.0}}
+                        </div>
+                        <div class="plan-name">1st Option</div>
+                    </div>
+                    <div class="divider"></div>
+                    <a href = "{{book.vendors.0}}" target="_blank"> <button class="cta">Order Now</button></a>
+                </div>
+
+            <div class="price-column">
+                <div class="price-header">
+                    <div class="price">
+                        <div class="dollar-sign">$</div>
+                            -
+                        </div>
+                    <div class="plan-name">2nd Option</div>
+                </div>
+                <div class="divider"></div>
+                <a href = "" target="_blank"> <button class="cta">Order Now</button></a>
             </div>
             {% elif book.arrayLen == 3 %}
             <div class="price-column">

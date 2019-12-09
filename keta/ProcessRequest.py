@@ -24,33 +24,33 @@ def process_isbn(isbn, generalInfo=None):
 
     try:
         ratingInfo = good_book_review(isbn)['books'][0]
-    except ErrorNoReviewFound:
+    except:
         ratingInfo = {'average_rating': 'No reviews yet!'}
 
     try:
         publisher = generalInfo['publisher']
-    except KeyError:
+    except:
         publisher = "no publisher found"
 
     try:
         title = generalInfo['volumeInfo']['title']
-    except KeyError:
+    except:
         title = "the title is not available "
     try:
         description = generalInfo['volumeInfo']['description']
-    except KeyError:
+    except:
         description = "the description is not available "
     try:
         authors = generalInfo['volumeInfo']['authors']
-    except KeyError:
+    except:
         authors = ["the author is not available "]
     try:
         date = generalInfo['volumeInfo']['publishedDate']
-    except KeyError:
+    except:
         date = "the publish date is not available "
     try:
         availableGoogle = generalInfo['saleInfo']['saleability'] == "FOR_SALE"
-    except KeyError:
+    except:
         availableGoogle = False
     purchasable = False
     prices = []
@@ -85,10 +85,6 @@ def process_isbn(isbn, generalInfo=None):
 
         prices = prices[:3]
         vendors = vendors[:3]
-        if len(prices) == 3:
-            prices[0], prices[1] = prices[1], prices[0]
-            vendors[0], vendors[1] = vendors[1], vendors[0]
-
 
     b = Book(title, description, prices, rating,authors, publisher, date, isbn, purchasable, vendors, len(prices))
     return b
