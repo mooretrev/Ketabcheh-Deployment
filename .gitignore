@@ -1,10 +1,5 @@
 *venv*
 .idea*
 *.pyc
-.ebextensions
 static
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
 

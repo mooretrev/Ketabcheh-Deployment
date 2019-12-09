@@ -17,6 +17,7 @@ def index(request):
             if type_of_search == 'isbn':
                 books = [None] * 1
                 books[0] = ProcessRequest.process_isbn(search_text)
+                print('The prices are {} and the vendors are {}'.format(books[0].prices, books[0].vendors))
                 context['books'] = books
                 return render(request, 'keta/index.html', context)
             elif type_of_search == 'title':
