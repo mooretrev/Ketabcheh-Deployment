@@ -71,99 +71,107 @@
 
       {% for book in books %}
           <div class="just">
-          <h3 class="aut-tit">{{book.title}}</h3>
-          <h5 class="aut-tit">
-             {% for author in book.authors %}
-              {{author}}
-              {% endfor %}
-          </h5>
-          <div class="desc">
-            <h6>{{book.description}}</h6>
-
+              <h3 class="aut-tit">{{book.title}}</h3>
+              <h5 class="aut-tit">
+                 {% for author in book.authors %}
+                  {{author}}
+                  {% endfor %}
+              </h5>
+            <div class="desc">
+                <h6>{{book.description}}</h6>
+            </div>
+              <h5>Rating: {{book.rating}}</h5>
         </div>
-      </div>
       <div class="divider"></div>
 
-    <div id="results">
-      <section class="price-comparison">
-        <div class="price-column">
-          <div class="price-header">
-            <div class="price">
-              <div class="dollar-sign">$</div>
-              30
+    <div id="pricing">
+        <section class="price-comparison">
+        {% if book.released %}
+            {% if book.arrayLen == 1 %}
+                <div class="price-column popular">
+                    <div class="most-popular">Cheapest</div>
+                    <div class="price-header">
+                        <div class="price">
+                            <div class="dollar-sign">$</div>
+                                {{book.prices.0}}
+                        </div>
+                        <div class="plan-name">1st Option</div>
+                    </div>
+                    <div class="divider"></div>
+                    <a href = "{{book.vendors.0}}" target="_blank"> <button class="cta">Order Now</button></a>
+                </div>
 
+            {% elif book.arrayLen == 2 %}
+                <div class="price-column popular">
+                    <div class="most-popular">Cheapest</div>
+                    <div class="price-header">
+                        <div class="price">
+                            <div class="dollar-sign">$</div>
+                                {{book.prices.0}}
+                        </div>
+                        <div class="plan-name">1st Option</div>
+                    </div>
+                    <div class="divider"></div>
+                    <a href = "{{book.vendors.0}}" target="_blank"> <button class="cta">Order Now</button></a>
+                </div>
+
+            <div class="price-column">
+                <div class="price-header">
+                    <div class="price">
+                        <div class="dollar-sign">$</div>
+                            {{book.prices.1}}
+                        </div>
+                    <div class="plan-name">2nd Option</div>
+                </div>
+                <div class="divider"></div>
+                <a href = "{{book.vendors.1}}" target="_blank"> <button class="cta">Order Now</button></a>
             </div>
-            <div class="plan-name">Google</div>
-          </div>
-          <div class="divider"></div>
-          <div class="feature">
-            <img src={% static "keta/check-circle.svg"%}>
-            1st comment
-          </div>
-          <div class="feature">
-            <img src={% static "keta/check-circle.svg"%}>
-            2nd comment
-          </div>
-          <div class="feature inactive">
-            <img src={% static "keta/check-circle.svg"%}>
-            3rd comment
-          </div>
-
-          <button class="cta">Order Now</button>
-        </div>
-        <div class="price-column popular">
-          <div class="most-popular">Cheapest</div>
-          <div class="price-header">
-            <div class="price">
-              <div class="dollar-sign">$</div>
-              10
-
+            {% elif book.arrayLen == 3 %}
+            <div class="price-column">
+                <div class="price-header">
+                    <div class="price">
+                        <div class="dollar-sign">$</div>
+                            {{book.prices.2}}
+                        </div>
+                    <div class="plan-name">3rd Option</div>
+                </div>
+                <div class="divider"></div>
+                <a href = "{{book.vendors.2}}" target="_blank"> <button class="cta">Order Now</button></a>
             </div>
-            <div class="plan-name">Amazon</div>
-          </div>
-          <div class="divider"></div>
-          <div class="feature">
-            <img src={% static "keta/check-circle.svg"%}>
-            1st comment
-          </div>
-          <div class="feature">
-            <img src={% static "keta/check-circle.svg"%}>
-            2nd comment
-          </div>
-          <div class="feature inactive">
-            <img src={% static "keta/check-circle.svg"%}>
-            3rd comment
-          </div>
 
-          <button class="cta">Order Now</button>
+            <div class="price-column popular">
+                    <div class="most-popular">Cheapest</div>
+                    <div class="price-header">
+                        <div class="price">
+                            <div class="dollar-sign">$</div>
+                                {{book.prices.0}}
+                        </div>
+                        <div class="plan-name">1st Option</div>
+                    </div>
+                    <div class="divider"></div>
+                    <a href = "{{book.vendors.0}}" target="_blank"> <button class="cta">Order Now</button></a>
+                </div>
 
-        </div>
-        <div class="price-column">
-          <div class="price-header">
-            <div class="price">
-              <div class="dollar-sign">$</div>
-              20
-
+            <div class="price-column">
+                <div class="price-header">
+                    <div class="price">
+                        <div class="dollar-sign">$</div>
+                            {{book.prices.1}}
+                        </div>
+                    <div class="plan-name">2nd Option</div>
+                </div>
+                <div class="divider"></div>
+                <a href = "{{book.vendors.1}}" target="_blank"> <button class="cta">Order Now</button></a>
             </div>
-            <div class="plan-name">ebay</div>
-          </div>
-          <div class="divider"></div>
-          <div class="feature">
-            <img src={% static "keta/check-circle.svg"%}>
-            1st comment
-          </div>
-          <div class="feature">
-            <img src={% static "keta/check-circle.svg"%}>
-            2nd comment
-          </div>
-          <div class="feature inactive">
-            <img src={% static "keta/check-circle.svg"%}>
-            3rd comment
-          </div>
 
-          <button class="cta">Order Now</button>
-        </div>
-      </section>
+            {% else %}
+                <h1>There was problem with arrayLength</h1>
+            {% endif %}
+
+        {% else %}
+            <h1>This book is not for sale</h1>
+        {% endif %}
+        </section>
     </div>
     <div class="divider"></div>
     {%endfor%}
